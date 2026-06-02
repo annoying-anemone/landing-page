@@ -1,0 +1,104 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Careers',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText Widget ******************* -->
+
+  <HeroText
+    tagline="Careers"
+    title="Join Our Mission to Empower Nature with Technology"
+    subtitle="Be part of a dynamic team that's shaping the future of environmental sustainability."
+  />
+
+  <!-- JobListings Widget **************** -->
+
+  <Features2
+    title="Open Positions"
+    subtitle="Explore opportunities to contribute your skills and grow with us."
+    items={[
+      {
+        title: 'Data Scientist',
+        description: 'Analyze ecological data and build predictive models to support sustainability goals.',
+        icon: 'tabler:chart-bar',
+      },
+      {
+        title: 'Frontend Developer',
+        description: 'Develop and optimize user interfaces for our cloud platforms and mobile applications.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Ecologist',
+        description: 'Work directly in natural habitats to collect data and collaborate on conservation projects.',
+        icon: 'tabler:leaf',
+      },
+      {
+        title: 'Customer Success Manager',
+        description: 'Ensure clients and partners achieve their goals using our tools and solutions.',
+        icon: 'tabler:heart-handshake',
+      },
+    ]}
+  />
+
+  <!-- Benefits Widget ***************** -->
+
+  <FAQs
+    title="Why Work with Us?"
+    subtitle="We offer more than just a job — we provide a purpose."
+    items={[
+      {
+        title: 'Impactful Work',
+        description: 'Contribute to groundbreaking projects that support environmental sustainability.',
+        icon: 'tabler:globe',
+      },
+      {
+        title: 'Professional Growth',
+        description: 'Access to training, certifications, and career advancement opportunities.',
+        icon: 'tabler:trending-up',
+      },
+      {
+        title: 'Flexible Work Options',
+        description: 'Enjoy a balance of remote and on-site work to suit your lifestyle.',
+        icon: 'tabler:adjustments-horizontal',
+      },
+      {
+        title: 'Diverse Team',
+        description: 'Collaborate with a global and inclusive group of professionals.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Health & Wellness',
+        description: 'Comprehensive health benefits and resources to keep you thriving.',
+        icon: 'tabler:heart',
+      },
+      {
+        title: 'Mission-Driven Culture',
+        description: 'Be inspired every day by a team dedicated to protecting our planet.',
+        icon: 'tabler:leaf',
+      },
+    ]}
+    classes={{ container: 'max-w-5xl' }}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    title="Ready to Join Us?"
+    subtitle="Apply now and help shape the future of environmental technology."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Contact Us',
+        href: '/contact',
+      },
+    ]}
+  />
+</Layout>

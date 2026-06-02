@@ -1,0 +1,63 @@
+---
+name: • 🚀 Release
+
+on: # yamllint disable-line rule:truthy
+  workflow_dispatch:
+    inputs:
+      #checkov:skip=CKV_GHA_7: required
+      environment:
+        description: "Environment to deploy to"
+        required: true
+        type: choice
+        options:
+          - uat
+          - production
+
+permissions: {}
+
+jobs:
+  ci:
+    name: Continuous Integration
+    uses: ./.github/workflows/__shared-ci.yml
+    permissions:
+      actions: read
+      checks: write
+      contents: read
+      id-token: write
+      issues: read
+      packages: write
+      pull-requests: write
+      security-events: write
+      statuses: write
+
+  release:
+    needs: [ci]
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
+    outputs:
+      tag: ${{ steps.create-release.outputs.tag }}
+    steps:
+      - id: create-release
+        uses: hoverkraft-tech/ci-github-publish/actions/release/create@84d583ba7b357f9476707f54cf5419d630ae0145 # 0.26.2
+        with:
+          prerelease: ${{ inputs.environment == 'uat' }}
+
+  deploy:
+    name: Deploy
+    needs: [release]
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      actions: read
+      contents: write
+      deployments: write
+      id-token: write
+      issues: write
+      packages: write
+      pull-requests: write
+    with:
+      tag: ${{ needs.release.outputs.tag }}
+      environment: ${{ inputs.environment }}
+    secrets: inherit

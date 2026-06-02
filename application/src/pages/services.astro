@@ -1,0 +1,145 @@
+---
+import { SITE } from 'astrowind:config';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Services',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    tagline="Services"
+    title="Harness technology for a sustainable future"
+    subtitle="Explore our innovative services designed to empower environmental conservation through cutting-edge technology and community engagement."
+    actions={[{ variant: 'primary', text: 'Learn More', href: '/services#our-services' }]}
+    image={{
+      src: '~/assets/images/services/hero.webp',
+      alt: 'Technology in Nature',
+    }}
+  />
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    id="our-services"
+    title="Our Services"
+    subtitle="Innovative solutions for environmental monitoring and conservation."
+    columns={2}
+    items={[
+      {
+        title: 'Cicada Ecosystem Monitoring',
+        description:
+          'Utilize IoT sensors and AI analytics to monitor cicada habitats in real-time, delivering crucial data on environmental conditions and behaviors.',
+        icon: 'tabler:device-analytics',
+      },
+      {
+        title: 'Lifecycle Tracking',
+        description:
+          'Employ GPS and micro-sensors to study cicada movements and lifecycle stages, aiding research on climate change and urbanization effects.',
+        icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Acoustic Analysis',
+        description:
+          'Leverage machine learning to analyze cicada calls, uncovering communication patterns and population health insights.',
+        icon: 'tabler:microphone',
+      },
+      {
+        title: 'Citizen Science Engagement',
+        description:
+          'Enable individuals to participate in cicada monitoring through a user-friendly app for sound recordings and sightings.',
+        icon: 'tabler:users',
+      },
+    ]}
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isReversed
+    items={[
+      {
+        title: 'Why Choose Us?',
+        description: `With a focus on cutting-edge technology and sustainability, ${SITE.name} delivers precise insights while fostering a collaborative approach to conservation.`,
+        icon: 'tabler:star',
+      },
+      {
+        title: 'Innovative Tools',
+        description:
+          'Harness advanced cloud computing, IoT, and AI for impactful environmental monitoring and data analysis.',
+        icon: 'tabler:settings',
+      },
+      {
+        title: 'Community Collaboration',
+        description:
+          'Engage researchers, conservationists, and citizen scientists to create a unified effort for ecological preservation.',
+        icon: 'tabler:users',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/services/collaboration-in-action.webp',
+      alt: 'Collaboration in Action',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Sustainability & Innovation</h3>
+    </Fragment>
+  </Content>
+
+  <!-- Testimonials Widget *********** -->
+
+  <Testimonials
+    title="What our partners say"
+    testimonials={[
+      {
+        testimonial: `${SITE.name}’s innovative tools have transformed the way we study cicadas. Their real-time data has provided invaluable insights for our conservation efforts.`,
+        name: 'Dr. Elise Harper',
+        job: 'Entomologist',
+        image: {
+          src: '~/assets/images/services/testimonial-01.webp',
+          alt: 'Dr. Elise Harper',
+        },
+      },
+      {
+        testimonial: `The citizen science app has brought our community together, fostering a shared responsibility for preserving our natural heritage.`,
+        name: 'Lucas Martinez',
+        job: 'Community Organizer',
+        image: {
+          src: '~/assets/images/services/testimonial-02.webp',
+          alt: 'Lucas Martinez',
+        },
+      },
+      {
+        testimonial: `Partnering with ${SITE.name} has significantly enhanced our research capabilities. Their technology is both reliable and user-friendly.`,
+        name: 'Dr. Aisha Khan',
+        job: 'Ecologist',
+        image: {
+          src: '~/assets/images/services/testimonial-03.webp',
+          alt: 'Dr. Aisha Khan',
+        },
+      },
+    ]}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Join the mission',
+        href: `${SITE.products.sense}/signup`,
+      },
+    ]}
+    title=`Empower conservation with ${SITE.name}`
+    subtitle="Take part in our innovative approach to preserving nature through technology."
+  />
+</Layout>

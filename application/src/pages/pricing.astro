@@ -1,0 +1,143 @@
+---
+import { SITE } from 'astrowind:config';
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import PricingTable from '~/components/shared/PricingTable.astro';
+
+const metadata = {
+  title: 'Pricing',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText Widget ******************* -->
+
+  <HeroText
+    tagline="Pricing"
+    title="Empowering Sustainability at Every Level"
+    subtitle="Select the ideal plan for your ecological and technological needs."
+  />
+
+  <!-- Pricing Widget ******************* -->
+  <PricingTable />
+
+  <!-- Features3 Widget ************** -->
+
+  <Features3
+    title="Why Choose Our Plans?"
+    subtitle="Features designed to support your conservation efforts"
+    columns={2}
+    items={[
+      {
+        title: 'Scalable Solutions',
+        description: 'Plans that grow with your research needs and project scope.',
+        icon: 'tabler:chart-arrows',
+      },
+      {
+        title: 'Data Security',
+        description: 'State-of-the-art encryption to protect sensitive ecological data.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'Comprehensive Analytics',
+        description: 'Detailed reports and visualizations for informed decision-making.',
+        icon: 'tabler:chart-line',
+      },
+      {
+        title: 'Community Access',
+        description: 'Connect with like-minded researchers and conservationists.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Eco-Friendly Operations',
+        description: 'Sustainable practices at the core of all our services.',
+        icon: 'tabler:leaf',
+      },
+      {
+        title: '24/7 Technical Support',
+        description: 'Dedicated support team ready to assist you anytime.',
+        icon: 'tabler:phone-call',
+      },
+    ]}
+    classes={{ container: 'max-w-5xl' }}
+  />
+
+  <!-- Steps Widget ****************** -->
+
+  <Steps
+    title="How to Get Started"
+    tagline="Your journey to eco-monitoring made easy"
+    isReversed={true}
+    items={[
+      {
+        title: 'Browse Plans',
+        icon: 'tabler:number-1',
+      },
+      {
+        title: 'Pick the Right Plan',
+        icon: 'tabler:number-2',
+      },
+      {
+        title: 'Register or Log In',
+        icon: 'tabler:number-3',
+      },
+      {
+        title: 'Confirm Subscription',
+        icon: 'tabler:number-4',
+      },
+      {
+        title: 'Start Monitoring Ecosystems',
+        icon: 'tabler:number-5',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/pricing/eco-monitoring-steps.webp',
+      alt: 'Eco-monitoring steps',
+    }}
+  />
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    title="Pricing FAQs"
+    subtitle="Have questions? We've got answers."
+    columns={1}
+    items={[
+      {
+        title: 'Can I switch plans later?',
+        description: 'Yes, you can upgrade or downgrade your plan anytime based on your needs.',
+      },
+      {
+        title: 'What payment methods do you accept?',
+        description: 'We accept credit cards, PayPal, and bank transfers.',
+      },
+      {
+        title: 'Is there a free trial available?',
+        description:
+          'While we don’t offer a free trial, our Starter plan is an affordable way to explore our services.',
+      },
+      {
+        title: 'How secure is my data?',
+        description: 'We use advanced encryption and follow best practices to keep your data safe.',
+      },
+    ]}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    title="Ready to take the next step?"
+    subtitle="Join our growing community of eco-conscious researchers and innovators."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get Started',
+        href: `${SITE.products.sense}/signup`,
+      },
+    ]}
+  />
+</Layout>

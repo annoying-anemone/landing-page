@@ -1,0 +1,79 @@
+---
+import { SITE } from 'astrowind:config';
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+
+const metadata = {
+  title: 'Contact',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText Widget ******************* -->
+
+  <HeroText tagline="Contact" title={`Connect with ${SITE.name}`} />
+
+  <ContactUs
+    id="form"
+    title="Reach Out to Us"
+    subtitle={`We value your interest in ${SITE.name}! Whether you have questions about our services, partnership opportunities, or just want to learn more, we’re here to help.`}
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Name',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+      },
+    ]}
+    textarea={{
+      label: 'Message',
+    }}
+    disclaimer={{
+      label:
+        'By submitting this form, you consent to the processing of your personal data as described in our privacy policy.',
+    }}
+    description="Our team typically responds within 24-48 business hours."
+  />
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    title="We’re Here for You"
+    items={[
+      {
+        title: 'Research and Collaboration',
+        description: `Contact us for inquiries about research partnerships, data access, or collaborations to advance environmental conservation.`,
+      },
+      {
+        title: 'Technical Support',
+        description:
+          'Need help with our platform? Reach out for assistance with IoT sensors, mobile app use, or data interpretation.',
+      },
+      {
+        title: 'General Questions',
+        description: `Have a question about ${SITE.name} or our mission? We’re happy to provide more information about our work and how you can get involved.`,
+      },
+      {
+        title: 'Phone',
+        description: SITE.contact.phone,
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Email',
+        description: SITE.contact.email,
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Location',
+        description: SITE.contact.address,
+        icon: 'tabler:map-pin',
+      },
+    ]}
+  />
+</Layout>

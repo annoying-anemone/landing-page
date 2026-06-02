@@ -1,0 +1,21 @@
+---
+services:
+  application:
+    build:
+      context: .
+      dockerfile: docker/application/Dockerfile
+      args:
+        APP_PATH: ./application
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cigales-cloud-landing-page-application.rule=Host(`landing-page.cigales-cloud.localhost`)"
+      - "traefik.http.services.cigales-cloud-landing-page-application.loadbalancer.server.port=8080"
+    stdin_open: true
+    tty: true
+    init: true
+    networks:
+      - traefik-proxy
+
+networks:
+  traefik-proxy:
+    external: true

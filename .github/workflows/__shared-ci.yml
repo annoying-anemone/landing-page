@@ -1,0 +1,106 @@
+---
+name: Shared - Continuous Integration for common tasks
+
+on: # yamllint disable-line rule:truthy
+  workflow_call:
+
+permissions: {}
+
+jobs:
+  linter:
+    uses: hoverkraft-tech/ci-github-common/.github/workflows/linter.yml@b553a696531fbd36743ccbb0c76c717971b8acdb # 0.35.4
+    permissions:
+      actions: read
+      contents: read
+      statuses: write
+      security-events: write
+    with:
+      # FIXME: remove VALIDATE_*_PRETTIER when supported (https://github.com/super-linter/super-linter/issues/6089)
+      linter-env: |
+        VALIDATE_TYPESCRIPT_ES=false
+        VALIDATE_CSS=false
+        VALIDATE_JAVASCRIPT_PRETTIER=false
+        VALIDATE_CSS_PRETTIER=false
+        VALIDATE_JSON_PRETTIER=false
+        VALIDATE_MARKDOWN_PRETTIER=false
+        VALIDATE_TYPESCRIPT_PRETTIER=false
+        VALIDATE_YAML_PRETTIER=false
+      codeql-languages: "" # FIXME: Let default value when CodeQL will be available (paid feature)
+
+  build:
+    uses: hoverkraft-tech/ci-github-container/.github/workflows/docker-build-images.yml@77f98ab8773b824eca7ed3f94e3e9c8b8af5875c # 0.36.1
+    permissions:
+      contents: read
+      packages: write
+      issues: read
+      pull-requests: read
+      id-token: write
+    with:
+      oci-registry: ${{ vars.OCI_REGISTRY }}
+      sign: false
+      images: |
+        [
+          {
+            "name": "ci",
+            "context": ".",
+            "dockerfile": "./docker/application/Dockerfile",
+            "build-args": { "APP_PATH": "./application/" },
+            "target": "ci",
+            "platforms": ["linux/amd64"]
+          },
+          {
+            "name": "application",
+            "context": ".",
+            "dockerfile": "./docker/application/Dockerfile",
+            "build-args": { "APP_PATH": "./application/" },
+            "target": "prod",
+            "platforms": ["linux/amd64"]
+          }
+        ]
+    secrets:
+      oci-registry-password: ${{ secrets.GITHUB_TOKEN }}
+
+  continuous-integration:
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@6b74a8f070140f5c120f78026d58e4c00d1b1e37 # 0.24.2
+    needs: build
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+      security-events: write
+      packages: read
+    with:
+      working-directory: /usr/src/app
+      container: |
+        {
+          "image": ${{ toJSON(fromJSON(needs.build.outputs.built-images).ci.images[0]) }},
+          "credentials": {
+            "username": ${{ toJson(github.repository_owner) }}
+          },
+          "pathMapping": {
+            "/usr/src/app": "./application"
+          }
+        }
+      code-ql: "" # FIXME: Set `typescript` when CodeQL will be available (paid feature)
+      dependency-review: false # FIXME: Set `true` when Dependency Review will be available (paid feature)
+    secrets:
+      container-password: ${{ secrets.GITHUB_TOKEN }}
+
+  tests-charts:
+    name: Tests - Charts
+    runs-on: "ubuntu-latest"
+    needs: build
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - name: Test helm charts
+        uses: hoverkraft-tech/ci-github-container/actions/helm/test-chart@77f98ab8773b824eca7ed3f94e3e9c8b8af5875c # 0.36.1
+        with:
+          helm-set: |
+            image.registry=${{ fromJSON(needs.build.outputs.built-images).application.registry }}
+            image.repository=${{ fromJSON(needs.build.outputs.built-images).application.repository }}
+            image.tag=${{ fromJSON(needs.build.outputs.built-images).application.tags[0] }}
+            image.digest=${{ fromJSON(needs.build.outputs.built-images).application.digest }}
+          oci-registry: ${{ vars.OCI_REGISTRY }}
+          oci-registry-password: ${{ github.token }}

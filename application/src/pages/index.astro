@@ -1,0 +1,394 @@
+---
+import { SITE } from 'astrowind:config';
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import PricingTable from '~/components/shared/PricingTable.astro';
+import { headerData } from '~/navigation';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+
+const metadata = {
+  title: `${SITE.name} — Empowering Nature with Technology for a Sustainable Future`,
+  description:
+    'Monitor and protect cicada ecosystems with cutting-edge IoT, AI, and cloud technologies. Join researchers, conservationists, and citizen scientists in preserving biodiversity through innovative conservation tools.',
+  ignoreTitleTemplate: true,
+  openGraph: {
+    type: 'website',
+  },
+};
+
+// Structured Data for SEO
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE.site}#organization`,
+      name: SITE.name,
+      url: SITE.site,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE.site}/favicon.svg`,
+      },
+      sameAs: [`https://${SITE.social.github}`, `https://twitter.com/${SITE.social.twitter}`],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: SITE.contact.email,
+        contactType: 'customer service',
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE.site}#website`,
+      url: SITE.site,
+      name: SITE.name,
+      publisher: {
+        '@id': `${SITE.site}#organization`,
+      },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${SITE.site}#webpage`,
+      url: SITE.site,
+      name: `${SITE.name} — Empowering Nature with Technology for a Sustainable Future`,
+      isPartOf: {
+        '@id': `${SITE.site}#website`,
+      },
+      about: {
+        '@id': `${SITE.site}#organization`,
+      },
+      description:
+        'Monitor and protect cicada ecosystems with cutting-edge IoT, AI, and cloud technologies. Join researchers, conservationists, and citizen scientists in preserving biodiversity through innovative conservation tools.',
+    },
+  ],
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Structured Data for SEO -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} slot="head" />
+
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      actions={[
+        {
+          variant: 'secondary',
+          text: 'Login',
+          target: '_blank',
+          href: `${SITE.products.sense}/login`,
+        },
+        {
+          variant: 'primary',
+          text: 'Sign Up',
+          target: '_blank',
+          href: `${SITE.products.sense}/signup`,
+        },
+      ]}
+      isSticky
+    />
+  </Fragment>
+
+  <!-- Hero2 Widget ******************* -->
+
+  <Hero2
+    tagline="Our mission"
+    actions={[
+      { variant: 'primary', target: '_blank', text: 'Get Started', href: `${SITE.products.sense}/signup` },
+      { text: 'Learn more', href: '#features' },
+    ]}
+    image={{
+      src: '~/assets/images/hero-image.webp',
+      alt: `${SITE.name} Hero Image - Technology monitoring cicada ecosystems`,
+    }}
+  >
+    <Fragment slot="title">
+      At {SITE.name},<br />we harness<span class="text-accent dark:text-white highlight"> cutting-edge technology</span>
+      to monitor and protect cicadas and their ecosystems.<br />
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        To create a smart, connected world that supports the sustainable preservation of cicadas and their natural
+        habitats through innovative cloud technologies, data-driven insights, and eco-friendly practices.
+
+        <span class="font-semibold">{SITE.name}</span>'s SaaS solutions.</span
+      >
+      Our values are rooted in sustainability, innovation, and community collaboration to protect and preserve cicada ecosystems.
+    </Fragment>
+  </Hero2>
+
+  <!-- Features Widget *************** -->
+
+  <Features
+    id="features"
+    title={`Why using ${SITE.name}?`}
+    subtitle="Each feature is designed to help you monitor and protect cicadas and their ecosystems with ease and precision."
+    columns={2}
+    items={[
+      {
+        title: 'Innovative Technology',
+        description: 'Leverage advanced cloud computing, IoT, and AI to deliver precise and actionable insights.',
+        icon: 'tabler:layers-union',
+      },
+      {
+        title: 'Commitment to Sustainability',
+        description: `Focus on environmental conservation and the protection of cicada habitats.`,
+        icon: 'tabler:artboard',
+      },
+      {
+        title: 'Community Collaboration',
+        description:
+          'Engage with researchers, conservationists, and the public to foster a collaborative approach to environmental monitoring.',
+        icon: 'tabler:writing',
+      },
+      {
+        title: 'Expert Support',
+        description:
+          'Benefit from our dedicated support team, ready to assist you with any questions or challenges you may encounter.',
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Scalable Solutions',
+        description:
+          'Our platform is designed to grow with your needs, offering scalable solutions that adapt to your evolving requirements.',
+        icon: 'tabler:chart-line',
+      },
+      {
+        title: 'User-Centric Design',
+        description: `Create intuitive and engaging user experiences that prioritize user needs and enhance usability.`,
+        icon: 'tabler:eyeglass',
+      },
+    ]}
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    title="Use cases"
+    subtitle={`Explore how ${SITE.name} empowers environmental conservation with innovative technology, connecting communities to protect cicadas and their ecosystems.`}
+    isReversed
+    items={[
+      {
+        title: 'Description:',
+        description: `At ${SITE.name}, we bridge technology and nature. Our platform offers advanced tools for monitoring and protecting cicadas, providing real-time insights into their habitats. From IoT sensors and AI-driven analytics to community engagement through citizen science, ${SITE.name} empowers researchers, conservationists, and enthusiasts to make a lasting impact on environmental preservation.`,
+      },
+      {
+        title: 'Benefits:',
+        description: `Gain real-time, actionable insights into cicada ecosystems through advanced IoT and AI technologies. <br /> Contribute to sustainable conservation efforts and study the impacts of climate change on biodiversity. <br /> Engage communities and foster collaboration with a user-friendly citizen science platform. <br /> Leverage innovative tools to protect and understand cicadas, ensuring their survival for future generations.`,
+      },
+    ]}
+    image={{
+      src: '~/assets/images/use-cases.webp',
+      alt: 'Researchers monitoring cicada habitat using technology',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Empowering Conservation Efforts: <br /><span class="text-2xl">Innovating with {SITE.name}</span>
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isAfterContent={true}
+    items={[
+      {
+        title: 'Description:',
+        description: `Join the movement to protect and study cicadas with ${SITE.name}. Our platform connects researchers, conservationists, and citizen scientists through innovative tools, including IoT sensors, AI-driven analytics, and a user-friendly mobile app. Together, we can monitor cicada habitats, track lifecycles, and analyze acoustic patterns to foster a sustainable future.`,
+      },
+      {
+        title: 'Benefits:',
+        description: `Contribute to groundbreaking research and environmental conservation. <br /> Access cutting-edge tools for real-time monitoring and data analysis. <br /> Collaborate with a community of like-minded individuals passionate about protecting cicadas and their ecosystems. <br /> Make a tangible impact on biodiversity and climate resilience through active involvement.`,
+      },
+    ]}
+    image={{
+      src: '~/assets/images/get-involved.webp',
+      alt: 'Conservation Efforts Collaboration Image',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Get Involved: <br /><span class="text-2xl"
+          >Join us in our mission to protect and understand cicadas. Whether you're a researcher, conservationist, or
+          nature enthusiast, {SITE.name} offers the tools and platform to make a meaningful impact.</span
+        >
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Testimonials Widget *********** -->
+
+  <Testimonials
+    title="What our partners say"
+    subtitle="Trusted by researchers, conservationists, and environmental organizations worldwide"
+    testimonials={[
+      {
+        testimonial: `${SITE.name}'s innovative tools have transformed the way we study cicadas. Their real-time data has provided invaluable insights for our conservation efforts.`,
+        name: 'Dr. Elise Harper',
+        job: 'Entomologist',
+        image: {
+          src: '~/assets/images/services/testimonial-01.webp',
+          alt: 'Dr. Elise Harper - Entomologist',
+        },
+      },
+      {
+        testimonial: `The citizen science app has brought our community together, fostering a shared responsibility for preserving our natural heritage.`,
+        name: 'Lucas Martinez',
+        job: 'Community Organizer',
+        image: {
+          src: '~/assets/images/services/testimonial-02.webp',
+          alt: 'Lucas Martinez - Community Organizer',
+        },
+      },
+      {
+        testimonial: `Partnering with ${SITE.name} has significantly enhanced our research capabilities. Their technology is both reliable and user-friendly.`,
+        name: 'Dr. Aisha Khan',
+        job: 'Ecologist',
+        image: {
+          src: '~/assets/images/services/testimonial-03.webp',
+          alt: 'Dr. Aisha Khan - Ecologist',
+        },
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Testimonials>
+
+  <PricingTable />
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: `What is ${SITE.name}, and how does it work?`,
+        description: `${SITE.name} is a platform that combines IoT, AI, and cloud technologies to monitor and protect cicada ecosystems. By using sensors, analytics, and community engagement, it provides actionable insights into cicada behaviors and environmental conditions.`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: `Can anyone contribute to ${SITE.name}’s efforts?`,
+        description: `Yes, ${SITE.name} is designed for researchers, conservationists, and citizen scientists alike. Whether you're an expert or an enthusiast, you can contribute by reporting sightings, recording cicada sounds, and using our mobile app.`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: `Do I need technical expertise to use ${SITE.name}’s tools?`,
+        description:
+          'No, our platform is built to be user-friendly and accessible for everyone. From the mobile app to data analytics dashboards, you can easily navigate and contribute without prior technical experience.',
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: `How does ${SITE.name} support large-scale conservation projects?`,
+        description: `${SITE.name} offers tailored solutions for conservation partners, including advanced monitoring tools, customizable analytics, and dedicated support for large-scale ecosystem management and research initiatives.`,
+        icon: 'tabler:chevrons-right',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Reach out to us"
+    subtitle="Have questions? Feel free to contact us using the form below. We're here to help!"
+    callToAction={{
+      text: 'Contact us',
+      href: '/contact',
+    }}
+    items={[
+      {
+        title: 'Email us',
+        description: SITE.contact.email,
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Contribute',
+        description: SITE.social.github,
+        icon: 'tabler:brand-github',
+      },
+      {
+        title: 'Follow us',
+        description: SITE.social.twitter,
+        icon: 'tabler:brand-linkedin',
+      },
+    ]}
+  />
+
+  <!-- BlogLatestPost Widget **************** -->
+
+  <BlogLatestPosts
+    id="blog"
+    title={`Explore insights on conservation with the ${SITE.name} Blog`}
+    information={`Discover our articles, guides, and stories about cicada ecosystems, environmental technologies, and how you can contribute to biodiversity preservation.`}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-green-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BlogLatestPosts>
+
+  <!-- FAQ Structured Data -->
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: `What is ${SITE.name}, and how does it work?`,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: `${SITE.name} is a platform that combines IoT, AI, and cloud technologies to monitor and protect cicada ecosystems. By using sensors, analytics, and community engagement, it provides actionable insights into cicada behaviors and environmental conditions.`,
+          },
+        },
+        {
+          '@type': 'Question',
+          name: `Can anyone contribute to ${SITE.name}'s efforts?`,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: `Yes, ${SITE.name} is designed for researchers, conservationists, and citizen scientists alike. Whether you're an expert or an enthusiast, you can contribute by reporting sightings, recording cicada sounds, and using our mobile app.`,
+          },
+        },
+        {
+          '@type': 'Question',
+          name: `Do I need technical expertise to use ${SITE.name}'s tools?`,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'No, our platform is built to be user-friendly and accessible for everyone. From the mobile app to data analytics dashboards, you can easily navigate and contribute without prior technical experience.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: `How does ${SITE.name} support large-scale conservation projects?`,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: `${SITE.name} offers tailored solutions for conservation partners, including advanced monitoring tools, customizable analytics, and dedicated support for large-scale ecosystem management and research initiatives.`,
+          },
+        },
+      ],
+    })}
+  />
+</Layout>

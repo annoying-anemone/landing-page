@@ -1,0 +1,89 @@
+---
+import { SITE } from 'astrowind:config';
+import Pricing from '~/components/widgets/Pricing.astro';
+import { getPermalink } from '~/utils/permalinks';
+---
+
+<Pricing
+  title="Flexible pricing plans for every conservationist"
+  subtitle={`At ${SITE.name}, we believe in providing value-driven pricing plans that cater to diverse needs while supporting environmental conservation.`}
+  tagline="Supporting Your Goals and Our Planet"
+  prices={[
+    {
+      title: 'Citizen Scientist',
+      subtitle: 'Access basic tools to contribute to cicada monitoring and reporting.',
+      price: '0',
+      period: 'per month',
+      items: [
+        {
+          description: 'Basic ecosystem monitoring tools',
+        },
+        {
+          description: 'Limited acoustic analysis features',
+        },
+        {
+          description: 'Community forum access',
+        },
+        {
+          description: 'Monthly data report summaries',
+        },
+      ],
+      callToAction: {
+        target: '_blank',
+        text: 'Join for Free',
+        href: `${SITE.products.sense}/signup`,
+      },
+    },
+    {
+      title: 'Researcher',
+      subtitle: 'Advanced tools for data analysis and ecosystem monitoring.',
+      price: 20,
+      period: 'per month',
+      items: [
+        {
+          description: 'Advanced monitoring and tracking tools',
+        },
+        {
+          description: 'Full access to acoustic analysis',
+        },
+        {
+          description: 'Priority customer support',
+        },
+        {
+          description: 'Weekly insights and data exports',
+        },
+      ],
+      callToAction: {
+        target: '_blank',
+        text: 'Upgrade to Researcher',
+        href: `${SITE.products.sense}/signup/researcher`,
+      },
+      hasRibbon: true,
+      ribbonTitle: 'popular',
+    },
+    {
+      title: 'Conservation Partner',
+      subtitle: 'Comprehensive, customizable solutions for large-scale conservation projects.',
+      price: 60,
+      period: 'per month',
+      items: [
+        {
+          description: 'Custom monitoring integrations',
+        },
+        {
+          description: 'Dedicated account manager',
+        },
+        {
+          description: 'Team training and workshops',
+        },
+        {
+          description: 'Unlimited data analytics',
+        },
+      ],
+      callToAction: {
+        text: 'Contact Us for Partnership',
+        href: getPermalink('contact'),
+      },
+    },
+  ]}
+/>

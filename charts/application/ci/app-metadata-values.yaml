@@ -1,0 +1,5 @@
+application:
+  name: landing-page
+  environment: production
+  version: 1.0.0
+  component: nginx

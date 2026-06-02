@@ -1,0 +1,205 @@
+---
+import { SITE } from 'astrowind:config';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'About Us',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    tagline="About Us"
+    image={{
+      src: '~/assets/images/about/hero.jpg',
+      alt: 'Lush Ecosystem Image',
+    }}
+  >
+    <Fragment slot="title">
+      Empowering Nature with Technology <br />
+      <span class="text-accent dark:text-white highlight"> For a Sustainable Future</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      {
+        `${SITE.name} leverages cutting-edge IoT and AI technologies to monitor and protect cicada habitats. Our mission is to connect conservationists, researchers, and citizen scientists in the effort to preserve biodiversity and combat climate challenges.`
+      }
+    </Fragment>
+  </Hero>
+
+  <!-- Stats Widget ****************** -->
+
+  <Stats
+    title="Our Impact in Numbers"
+    stats={[
+      { title: 'Cicada Habitats Monitored', amount: '250+' },
+      { title: 'Research Collaborations', amount: '30+' },
+      { title: 'Contributors', amount: '15,000+' },
+      { title: 'Awards for Innovation', amount: '12' },
+    ]}
+  />
+
+  <!-- Features3 Widget ************** -->
+
+  <Features3
+    title="What We Offer"
+    subtitle="Our tools and technologies are designed to empower researchers, conservationists, and citizen scientists."
+    columns={3}
+    isBeforeContent={true}
+    items={[
+      {
+        title: 'Real-Time Monitoring',
+        description:
+          'Our IoT sensors provide live updates on environmental conditions, helping track cicada behaviors and habitats.',
+        icon: 'tabler:device-laptop',
+      },
+      {
+        title: 'Lifecycle Tracking',
+        description:
+          'Track cicada lifecycles and migration patterns to understand their ecological significance and protect their environments.',
+        icon: 'tabler:track',
+      },
+      {
+        title: 'Acoustic Analysis',
+        description:
+          'Analyze cicada songs with AI-powered tools to monitor population health and detect environmental stressors.',
+        icon: 'tabler:microphone',
+      },
+    ]}
+  />
+
+  <!-- Features3 Widget ************** -->
+
+  <Features3
+    columns={3}
+    isAfterContent={true}
+    items={[
+      {
+        title: 'Data Visualization',
+        description:
+          'Get detailed insights with easy-to-use dashboards, visualizing habitat health and trends over time.',
+        icon: 'tabler:chart-bar',
+      },
+      {
+        title: 'Community Engagement',
+        description:
+          'Join a network of like-minded conservationists and contribute to meaningful biodiversity projects.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Research Support',
+        description: `Collaborate with ${SITE.name} for data access and customized solutions for your conservation initiatives.`,
+        icon: 'tabler:book',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/about/teamwork.jpg',
+      alt: 'Collaborative Teamwork Image',
+    }}
+  />
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Our Core Values"
+    subtitle="We are guided by principles that prioritize environmental preservation, innovation, and collaboration."
+    items={[
+      {
+        title: 'Innovation for Conservation',
+        description:
+          'We utilize the latest technology to bring precision and efficiency to conservation efforts worldwide.',
+      },
+      {
+        title: 'Sustainability',
+        description: 'Our mission aligns with long-term ecological health and the preservation of biodiversity.',
+      },
+      {
+        title: 'Collaboration',
+        description:
+          'We believe in the power of collective action and foster partnerships with researchers, organizations, and individuals.',
+      },
+    ]}
+  />
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Milestones"
+    subtitle="A few of our notable achievements in conservation and technology."
+    isReversed={true}
+    callToAction={{
+      text: 'Learn More',
+      href: '/about',
+    }}
+    items={[
+      {
+        title: 'Global Monitoring Network',
+        description: 'Developed a robust network of IoT devices across five continents to track cicada populations.',
+        icon: 'tabler:network',
+      },
+      {
+        title: 'Community Impact',
+        description: 'Engaged thousands of citizen scientists in active biodiversity protection campaigns.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Technological Recognition',
+        description: 'Earned industry awards for our innovative use of AI in bioacoustics and habitat mapping.',
+        icon: 'tabler:award',
+      },
+    ]}
+  />
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    title="Our Global Presence"
+    tagline="Find Us"
+    columns={4}
+    items={[
+      {
+        title: 'United States',
+        description: '42 Green Valley Lane, Conservation City, Earth',
+      },
+      {
+        title: 'France',
+        description: '15 Rue Verte, 75000, Paris',
+      },
+      {
+        title: 'Japan',
+        description: '3-12-4 Aoyama, Tokyo',
+      },
+      {
+        title: 'South Africa',
+        description: '10 Greenway, Cape Town',
+      },
+    ]}
+  />
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    title="Contact Us"
+    tagline="Support & Assistance"
+    columns={2}
+    items={[
+      {
+        title: 'Chat Support',
+        description: 'Reach out for guidance on using our tools or questions about ongoing projects.',
+        icon: 'tabler:messages',
+      },
+      {
+        title: 'Call Support',
+        description: 'Speak with our team directly for technical support or collaboration inquiries.',
+        icon: 'tabler:phone',
+      },
+    ]}
+  />
+</Layout>

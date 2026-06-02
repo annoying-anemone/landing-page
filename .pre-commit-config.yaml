@@ -1,0 +1,27 @@
+---
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-executables-have-shebangs
+      - id: check-symlinks
+      - id: check-yaml
+        exclude: ^charts/
+      - id: detect-aws-credentials
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+
+  - repo: https://github.com/gruntwork-io/pre-commit
+    rev: v0.1.23
+    hooks:
+      - id: helmlint
+
+  - repo: https://github.com/jtyr/kubeconform-helm
+    rev: v0.1.17
+    hooks:
+      - id: kubeconform-helm

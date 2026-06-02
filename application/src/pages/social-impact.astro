@@ -1,0 +1,120 @@
+---
+import { SITE } from 'astrowind:config';
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Steps from '~/components/widgets/Steps.astro';
+
+const metadata = {
+  title: 'Social Impact',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText Widget ******************* -->
+
+  <HeroText
+    tagline="Social Impact"
+    title="Creating a Sustainable World Through Technology"
+    subtitle="Discover how we’re driving meaningful change for ecosystems and communities around the globe."
+  />
+
+  <!-- Features3 Widget *************** -->
+
+  <Features3
+    title="Our Social Impact Initiatives"
+    subtitle="Innovative solutions with a focus on sustainability and equity."
+    columns={2}
+    items={[
+      {
+        title: 'Empowering Researchers',
+        description: 'Providing advanced tools for environmental scientists to monitor and protect ecosystems.',
+        icon: 'tabler:microscope',
+      },
+      {
+        title: 'Community Engagement',
+        description:
+          'Collaborating with citizen scientists to raise awareness and encourage participation in conservation efforts.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Educational Outreach',
+        description: 'Creating learning resources for students and educators to inspire future generations.',
+        icon: 'tabler:school',
+      },
+      {
+        title: 'Climate Change Mitigation',
+        description: 'Harnessing data analytics to understand and combat the effects of climate change.',
+        icon: 'tabler:cloud-rain',
+      },
+      {
+        title: 'Biodiversity Protection',
+        description: 'Contributing to the preservation of biodiversity by monitoring species populations and habitats.',
+        icon: 'tabler:tree',
+      },
+      {
+        title: 'Technology for All',
+        description: 'Ensuring our solutions are accessible and scalable for underserved communities.',
+        icon: 'tabler:device-mobile',
+      },
+    ]}
+    classes={{ container: 'max-w-5xl' }}
+  />
+
+  <!-- ImpactMetrics Widget *********** -->
+
+  <Steps
+    title="Our Journey of Impact"
+    subtitle="Key milestones in our mission to protect and empower."
+    items={[
+      {
+        title: '2020',
+        description: `${SITE.name} was founded with a vision to combine technology and sustainability.`,
+        icon: 'tabler:rocket',
+      },
+      {
+        title: '2021',
+        description:
+          'Launched our first IoT-based cicada habitat monitoring system, empowering conservationists worldwide.',
+        icon: 'tabler:device-desktop-analytics',
+      },
+      {
+        title: '2022',
+        description: 'Engaged over 10,000 citizen scientists in monitoring ecosystems through our user-friendly app.',
+        icon: 'tabler:users',
+      },
+      {
+        title: '2023',
+        description:
+          'Expanded our services to include climate change analytics and biodiversity tracking across continents.',
+        icon: 'tabler:globe',
+      },
+      {
+        title: '2024',
+        description:
+          'Initiated partnerships with educational institutions to promote ecological awareness among students.',
+        icon: 'tabler:school',
+      },
+    ]}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    title="Join Us in Making a Difference"
+    subtitle="Get involved in our mission to empower communities and protect the environment."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Learn More',
+        href: '/about',
+      },
+      {
+        variant: 'secondary',
+        text: 'Careers',
+        href: '/careers',
+      },
+    ]}
+  />
+</Layout>

@@ -1,0 +1,56 @@
+---
+name: Deploy
+
+on: # yamllint disable-line rule:truthy
+  issue_comment:
+    types: [created]
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+      environment:
+        required: true
+        type: string
+
+permissions: {}
+
+jobs:
+  deploy:
+    name: Deploy
+    uses: hoverkraft-tech/ci-github-publish/.github/workflows/deploy-chart.yml@84d583ba7b357f9476707f54cf5419d630ae0145 # 0.26.2
+    permissions:
+      actions: read
+      contents: write
+      deployments: write
+      id-token: write
+      issues: write
+      packages: write
+      pull-requests: write
+    secrets:
+      oci-registry-password: ${{ secrets.GITHUB_TOKEN }}
+      github-app-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }}
+    with:
+      url: ${{ (inputs.environment == 'uat' && vars.UAT_URL) || (inputs.environment == 'production' && vars.PRODUCTION_URL) || vars.REVIEW_APPS_URL }}
+      tag: ${{ inputs.tag }}
+      environment: ${{ inputs.environment }}
+      github-app-client-id: ${{ vars.CI_BOT_APP_CLIENT_ID }}
+      deploy-parameters: |
+        { "repository": "${{ github.repository_owner}}/argocd-app-of-apps" }
+      images: |
+        [
+           {
+            "name": "application",
+            "context": ".",
+            "dockerfile": "./docker/application/Dockerfile",
+            "build-args": { "APP_PATH": "./application/" },
+            "target": "prod",
+            "platforms": ["linux/amd64"]
+          }
+        ]
+      chart-values: |
+        [
+          { "path": ".image", "image": "application" },
+          { "path": ".application.version", "value": "{{ tag }}" },
+          { "path": "deploy.ingress.hosts[0].host", "value": "{{ url }}" }
+        ]

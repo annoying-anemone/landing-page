@@ -1,0 +1,7 @@
+---
+services:
+  application:
+    build:
+      target: dev
+    volumes:
+      - "./application:/usr/src/app"

@@ -1,0 +1,83 @@
+---
+version: 2
+
+updates:
+  - package-ecosystem: "npm"
+    open-pull-requests-limit: 20
+    directory: "/application"
+    versioning-strategy: increase
+    schedule:
+      interval: "weekly"
+    groups:
+      npm-astro-dependencies:
+        patterns:
+          - "@astrojs/*"
+          - "@astrolib/*"
+          - "astro"
+          - "astro-*"
+      npm-tailwind-dependencies:
+        patterns:
+          - "@tailwindcss/*"
+          - "tailwindcss"
+          - "tailwind-*"
+      npm-fontsource-variable-dependencies:
+        patterns:
+          - "@fontsource-variable/*"
+      npm-development-dependencies:
+        dependency-type: "development"
+        patterns:
+          - "*"
+      npm-production-dependencies:
+        dependency-type: "production"
+        patterns:
+          - "*"
+
+  - package-ecosystem: "docker"
+    open-pull-requests-limit: 20
+    directories:
+      - "/"
+      - "/docker/application"
+      - "/charts/application"
+    schedule:
+      interval: "weekly"
+    groups:
+      docker-dependencies:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "helm"
+    open-pull-requests-limit: 20
+    directories:
+      - "/charts/application"
+    schedule:
+      interval: "weekly"
+    groups:
+      helm-dependencies:
+        patterns:
+          - "*"
+
+  - package-ecosystem: docker-compose
+    directory: "/"
+    open-pull-requests-limit: 20
+    schedule:
+      interval: weekly
+    groups:
+      docker-compose-dependencies:
+        patterns:
+          - "*"
+
+  - package-ecosystem: github-actions
+    open-pull-requests-limit: 20
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      github-actions-dependencies:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "devcontainers"
+    open-pull-requests-limit: 20
+    directory: "/"
+    schedule:
+      interval: weekly

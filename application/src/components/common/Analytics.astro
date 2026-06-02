@@ -1,0 +1,32 @@
+---
+import { ANALYTICS } from 'astrowind:config';
+
+const trackingId = ANALYTICS?.vendors?.googleAnalytics?.id ? String(ANALYTICS.vendors.googleAnalytics.id) : undefined;
+const usePartytown = Boolean(ANALYTICS?.vendors?.googleAnalytics?.partytown);
+const scriptType = usePartytown ? 'text/partytown' : undefined;
+const bootstrapScript = trackingId
+  ? `window.dataLayer = window.dataLayer || [];
+const gtag = (...params) => window.dataLayer.push(params);
+window.gtag = window.gtag || gtag;
+window.gtag('js', new Date());
+const trackingId = ${JSON.stringify(trackingId)};
+const trackPageView = () => {
+  window.gtag('config', trackingId, {
+    page_location: window.location.href,
+    page_path: window.location.pathname + window.location.search,
+    page_title: document.title,
+  });
+};
+trackPageView();
+document.addEventListener('astro:page-load', trackPageView);`
+  : undefined;
+---
+
+{
+  trackingId ? (
+    <>
+      <script is:inline type={scriptType} async src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`} />
+      <script is:inline set:html={bootstrapScript} />
+    </>
+  ) : null
+}

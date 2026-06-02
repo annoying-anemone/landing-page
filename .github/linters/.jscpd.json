@@ -1,0 +1,10 @@
+{
+  "threshold": 5,
+  "ignore": [
+    "**/application/.astro/**",
+    "**/application/dist/**",
+    "**/application/node_modules/**",
+    "**/application/coverage/**",
+    "**/application/junit.xml"
+  ]
+}
