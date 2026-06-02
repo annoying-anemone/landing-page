@@ -1,4 +1,4 @@
-FROM node:26.2-bookworm-slim AS base
+FROM node:26.3-bookworm-slim AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
 # hadolint ignore=DL3008,DL3016
