@@ -8,7 +8,7 @@ permissions: {}
 
 jobs:
   linter:
-    uses: hoverkraft-tech/ci-github-common/.github/workflows/linter.yml@b553a696531fbd36743ccbb0c76c717971b8acdb # 0.35.4
+    uses: hoverkraft-tech/ci-github-common/.github/workflows/linter.yml@ba599fc83e506112157ffd316e77d864f8b24b36 # 0.36.3
     permissions:
       actions: read
       contents: read
@@ -28,7 +28,7 @@ jobs:
       codeql-languages: "" # FIXME: Let default value when CodeQL will be available (paid feature)
 
   build:
-    uses: hoverkraft-tech/ci-github-container/.github/workflows/docker-build-images.yml@77f98ab8773b824eca7ed3f94e3e9c8b8af5875c # 0.36.1
+    uses: hoverkraft-tech/ci-github-container/.github/workflows/docker-build-images.yml@5396e1258d209f9af18e55da8692361508e3338c # 0.36.2
     permissions:
       contents: read
       packages: write
@@ -61,7 +61,7 @@ jobs:
       oci-registry-password: ${{ secrets.GITHUB_TOKEN }}
 
   continuous-integration:
-    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@6b74a8f070140f5c120f78026d58e4c00d1b1e37 # 0.24.2
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@df348077afa4e79725151d50606e9dc63f86dcb6 # 0.24.4
     needs: build
     permissions:
       contents: read
@@ -95,7 +95,7 @@ jobs:
       packages: read
     steps:
       - name: Test helm charts
-        uses: hoverkraft-tech/ci-github-container/actions/helm/test-chart@77f98ab8773b824eca7ed3f94e3e9c8b8af5875c # 0.36.1
+        uses: hoverkraft-tech/ci-github-container/actions/helm/test-chart@5396e1258d209f9af18e55da8692361508e3338c # 0.36.2
         with:
           helm-set: |
             image.registry=${{ fromJSON(needs.build.outputs.built-images).application.registry }}
